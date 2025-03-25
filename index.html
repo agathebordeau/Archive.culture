@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>TEST / filtres</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+  
+  
+  <header>
+    
+  <div class="titre">
+    <span> <h1>ARCHIVE.culture</h1> </span>
+  </div>
+
+    
+    
+    
+  
+<div class="cache">
+
+  
+<div class="flex-container">
+  
+  <div class="flex-item-left">
+    <h1>ARCHIVE.culture</h1>
+    <h2>Supports de communication <br> dans les institusions et milieux culturels</h2>
+ </div>
+  
+  <div class="flex-item-right">
+          <div class="filter-menu">
+            <div v-for="(filterGroup, index) in filters" 
+                 :key="index" 
+                 class="filter-group"
+                 :data-category="filterGroup.category">
+              <div class="hell">
+              <h3>{{ filterGroup.category }}</h3>
+              <div class="reset-filter" @click="resetFilters(filterGroup.category)">[X]</div>
+
+              <div class="filter-container">
+                <button class="scroll-btn scroll-left" @click="scrollLeft(index)">‹</button>
+                
+                <div class="filter-scroll" :ref="'filterScroll' + index">
+                  <div v-for="(filter, filterIndex) in filterGroup.filters"
+     :key="filterIndex"
+     class="filter"
+     :class="{ selected: isSelected(filter) }"
+     @click="toggleFilter(filter)"
+     :style="[
+       filterGroup.category === 'Couleur' ? { backgroundColor: filter } : {},
+       isFilterDisabled(filter, filterGroup.category) ? { opacity: 0.3 } : {}
+     ]">
+  {{ filterGroup.category === 'Couleur' ? '' : filter }}
+</div>
+                </div>
+
+                <button class="scroll-btn scroll-right" @click="scrollRight(index)">›</button>
+                
+              </div>
+              </div>
+            </div>
+          </div>
+
+  </div>
+
+
+  
+
+
+
+
+</header>
+
+  
+  
+    <div class="wrapper">
+      
+    <div class="grid"> 
+  
+      
+    <div class="rows-container">
+        <div v-for="(row, rowIndex) in filteredData" :key="rowIndex" class="row item">
+            <div class="row-block">
+              
+           
+             <span v-for="(item, i) in getColumnData(row, 'IMG')" :key="i">
+               <img :src="item" alt="Image" class="image"/>
+             </span>
+              
+              <div class="cell">
+               <B>  <span v-for="(item, i) in getColumnData(row, 'STRUCTURE')" :key="i">{{ item }}</span>  </B>
+                </div>
+              <div class="cell">
+                <span v-for="(item, i) in getColumnData(row, 'DA')" :key="i">{{ item }} | <i> <span v-for="(item, i) in getColumnData(row, 'DATE')" :key="i">{{ item }}</span> </span>
+                <BR><BR>
+                  <a @click="openModal(rowIndex)" class="openModal">→ Détails</a>
+              </div>
+          
+
+                
+               
+    <div id="myModal" class="modal" v-if="selectedRowIndex !== null" @click.self="closeModal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <h2>Détails</h2>
+
+        <div v-if="selectedRowIndex !== null" class="modal-galerie">
+          <span v-for="(item, i) in getColumnData(filteredData[selectedRowIndex], 'CONTENU')" :key="i">
+            <img :src="item" class="image-modal"/>
+          </span>
+        </div>
+
+        
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/vue@2'></script><script  src="./script.js"></script>
+
+</body>
+</html>
