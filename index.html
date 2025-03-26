@@ -75,8 +75,7 @@
 
 </header>
 
-  
-  
+    
     <div class="wrapper">
       
     <div class="grid"> 
@@ -99,13 +98,19 @@
                 <BR><BR>
                   <a @click="openModal(rowIndex)" class="openModal">→ Détails</a>
               </div>
-                  </div>
-        </div>
-    </div>
-</div>
+          
+ </div>
                 
                
-    <div id="myModal" class="modal" v-if="selectedRowIndex !== null" @click.self="closeModal">
+
+
+        
+        </div>
+            </div>
+        </div>
+  
+
+      <div id="myModal" class="modal" v-if="selectedRowIndex !== null" @click.self="closeModal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
         <h2>Détails</h2>
@@ -115,9 +120,9 @@
             <img :src="item" class="image-modal"/>
           </span>
         </div>
-        </div>
-            </div>
-
+ </div>
+        
+   </div>
 <!-- partial -->
   <script src='https://cdn.jsdelivr.net/npm/vue@2'></script><script  src="./script.js"></script>
 
