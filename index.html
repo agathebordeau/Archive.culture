@@ -61,6 +61,7 @@
                 <button class="scroll-btn scroll-right" @click="scrollRight(index)">›</button>
                 
               </div>
+                                <div class="reset-filter" v-show="hasActiveFilters(filterGroup.category)" @click="resetFilters(filterGroup.category)">[X]</div>
               </div>
             </div>
           </div>
