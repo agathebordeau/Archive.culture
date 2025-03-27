@@ -233,7 +233,10 @@ window.app = new Vue({
 }
         },
       
-      
+            hasActiveFilters(category) {
+    return this.filters.find(group => group.category === category)?.filters.some(f => this.selectedFilters.includes(f));
+},
+        
       isSelected(filter) {
       return this.selectedFilters.includes(filter);
     },
